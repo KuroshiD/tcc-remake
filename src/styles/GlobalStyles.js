@@ -9,7 +9,9 @@ const GlobalStyles = createGlobalStyle`
         text-decoration: none;
         list-style: none;
     }
-
+    #root {
+        background: #111;
+    }
     :root {
         --primary: #1d1d1d;
         --black: #c6c6c6;

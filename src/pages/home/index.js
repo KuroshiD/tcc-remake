@@ -2,14 +2,14 @@ import React from 'react'
 import { Container } from './styles'
 import Search from '../../components/Search'
 import Carrousel from '../../components/Carrousel'
-import Animes from '../../components/Animes'
+import AnimeRow from '../../components/AnimeRow'
 
 export default function index() {
     return (
         <Container>
             <Search />
             <Carrousel />
-            <Animes />
+            <AnimeRow />
         </Container>
     )
 }

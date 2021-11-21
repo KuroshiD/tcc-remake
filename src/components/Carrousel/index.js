@@ -1,23 +1,50 @@
-import React from "react"
-import { Carousel } from "3d-react-carousal"
-import { Container } from './styles'
-import Carousel1 from '../../assets/img/carousel1.jpg'
-import Carousel2 from '../../assets/img/carousel2.jpg'
-import Carousel3 from '../../assets/img/carousel3.jpg'
+import React, { useState, useEffect } from "react"
+import { Container } from "./styles"
+import Carousel from "react-gallery-carousel"
+import "react-gallery-carousel/dist/index.css"
+import "./styles.css"
+import Carousel1 from "../../assets/img/carousel1.jpg"
+import Carousel2 from "../../assets/img/carousel2.jpg"
+import Carousel3 from "../../assets/img/carousel3.jpg"
 
-export default function index() {
-  const slides = [
-    <img src={Carousel1} alt="1" style={{height: "400px", width: "100%"}} />,
-    <img src={Carousel2} alt="2" style={{height: "400px", width: "100%"}} />,
-    <img src={Carousel3} alt="3" style={{height: "400px", width: "100%"}}/>,
-  ]
+const getWindowDimensions = () => {
+  const width = window.innerWidth
+  return width
+}
+
+export default function Index() {
+  const [windowDimensions, setWindowDimensions] = useState(
+    getWindowDimensions()
+  )
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions())
+    }
+
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
+
+  const getImageSize = () => {
+    if (windowDimensions > 1600) {
+      return ("750px")
+    } else if (windowDimensions > 1400) {
+      return "650px"
+    } else if (windowDimensions > 1200) {
+      return "550px"
+    } else if (windowDimensions > 800) {
+      return "450px"
+    } else if (windowDimensions > 480) {
+      return "350px"
+    } 
+    
+  }
+  const images = [{ src: Carousel1 }, { src: Carousel2 }, { src: Carousel3 }]
 
   return (
-    
     <Container>
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"></link>
-        <Carousel slides={slides} autoplay={false} />
+      <Carousel images={images} style={{ height: getImageSize()}} />
     </Container>
-    
-    )
+  )
 }
